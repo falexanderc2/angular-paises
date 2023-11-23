@@ -1,0 +1,4 @@
+<label for="txtSearch">Búsquedas</label>
+<input type="search" #txtSearch (keyup.enter)="emitValue(txtSearch.value)" placeholder="{{placeholder}}"
+  class="form-control" />
+<hr />

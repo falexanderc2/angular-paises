@@ -1,0 +1,13 @@
+{
+  "bracketSameLine": true,
+  "semi": false,
+  "useTabs": true,
+  "trailingComma": "all",
+  "singleAttributePerLine": true,
+  "requirePragma": true,
+  "proseWrap": "never",
+  "quoteProps": "as-needed",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "singleQuote": true
+}

@@ -1,0 +1,22 @@
+<h2>Países</h2>
+<hr>
+
+<ul *ngFor="let item of menu" class="list-group">
+  <li [routerLink]="item.ruta" routerLinkActive="active" class="list-group-item">
+    {{item.title}}
+  </li>
+</ul>
+<hr>
+
+
+<ul class="list-group">
+  <li routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="list-group-item">
+    Home
+  </li>
+  <li routerLink="about" routerLinkActive="active" class="list-group-item">
+    About
+  </li>
+  <li routerLink="contact" routerLinkActive="active" class="list-group-item">
+    Contact
+  </li>
+</ul>
