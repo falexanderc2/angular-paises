@@ -1,4 +1,15 @@
 <label for="txtSearch">Búsquedas</label>
-<input type="search" #txtSearch (keyup.enter)="emitValue(txtSearch.value)" placeholder="{{placeholder}}"
-  class="form-control" />
+
+<!-- (onKeypress)="emitKeyPress(txtSearch.value)" -->
+
+
+<input
+  type="search"
+  #txtSearch
+  (keyup)="emitKeyPress(txtSearch.value)"
+  [value]="initValue"
+  placeholder="{{placeholder}}"
+  (keyup.enter)="emitValue(txtSearch.value)"
+  class="form-control"
+/>
 <hr />

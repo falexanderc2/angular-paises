@@ -1,0 +1,1 @@
+export type TRegion = string | 'Africa' | 'Americas' | 'Asia' | 'Europe' | 'Oceania' | ''

@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from "@angular/core"
+import { Subject, Subscription, debounceTime } from "rxjs"
 
 /**
  * Componente de caja de búsqueda compartida.
@@ -6,20 +7,31 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
  * Este componente muestra una caja de búsqueda con un placeholder personalizable.
  * Cuando se pulsa la tecla Enter, emite el valor ingresado mediante el evento onValue.
  */
-@Component({
+@Component( {
   selector: "shared-search-box",
   templateUrl: "./search-box.component.html",
   styles: [],
-})
-export class SearchBoxComponent {
+} )
+export class SearchBoxComponent implements OnInit, OnDestroy {
   /**
    * Placeholder para la caja de búsqueda.
    *
    * Este valor se muestra como texto de ayuda dentro de la caja de búsqueda.
    */
-  @Input()
-  public placeholder: string = "";
 
+  /**
+  * private debouncer: Subject<string> = new Subject<string>(), este es un observable, que contiene un metodo llamado .pipe(debounceTime(delay)), el cual permite con el paramento delay esperar un tiempo
+  * para que se ejecute el método suscribe, en este caso espera 1 segundo en espera de entrada por teclado, de no existir más entrada se ejecuta el suscribe
+ 
+  */
+  private debouncer: Subject<string> = new Subject<string>()
+  private debouncerSuscription?: Subscription // permite manejar las suscripciones aunque se puede ignora y hacerlo de forma directa desde el debouncer
+
+  @Input()
+  public placeholder: string = ""
+
+  @Input()
+  public initValue: string = ''
   /**
    * Evento que se emite cuando se ingresa un valor en la caja de búsqueda y se pulsa Enter.
    *
@@ -28,7 +40,26 @@ export class SearchBoxComponent {
   @Output()
   public onValue: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() {}
+  @Output()
+  public onDebounce: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor () { }
+
+  ngOnInit (): void {
+    this.debouncerSuscription = this.debouncer
+      .pipe(
+        debounceTime( 1000 ) // ? 2. Es un delay de 1 segundo, si no se ejecuta más pulsaciones se ejecuta el subscribe
+      )
+      .subscribe( ( valor ) => {
+        this.onDebounce.emit( valor ) // ? 3. Cuando no se pulsa más teclas se ejecuta esta emisión
+      } )
+  }
+  ngOnDestroy (): void {
+    //aqui se puede hacer de dos formas para desuscribir
+    // 1era Forma: this.debouncer.unsubscribe()
+    //2da Forma: this.debouncerSuscription?.unsubscribe()
+    this.debouncerSuscription?.unsubscribe()
+  }
 
   /**
    * Emite el valor ingresado mediante el evento onValue.
@@ -52,7 +83,12 @@ export class SearchBoxComponent {
     );
    * @param value
    */
-  emitValue(value: string): void {
-    this.onValue.emit(value); //en esta linea se emite el valor de lo escrito al evento
+  emitValue ( value: string ): void {
+    this.onValue.emit( value ) //en esta linea se emite el valor de lo escrito al evento
+  }
+
+  emitKeyPress ( value: string ): void {
+    this.debouncer.next( value ) // ? 1. proporciona el proximo valor
+
   }
 }

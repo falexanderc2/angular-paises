@@ -1,14 +1,27 @@
+<!-- (onValue)="searchByCapital($event)" -->
 <h2>Por Capital</h2>
 <hr />
 <div class="row">
   <div class="col">
-    <shared-search-box (onValue)="searchByCapital($event)"
-      placeholder="Escriba el nombre de la Capital"></shared-search-box>
+    <shared-search-box
+      (onDebounce)="searchByCapital($event)"
+      placeholder="Escriba el nombre de la Capital"
+      [initValue]="initValue"
+    ></shared-search-box>
   </div>
 </div>
 
 <div class="row">
   <div class="col">
-    <countries-table [countries]="countries" paramsSearch="No se encontraron Capitales"></countries-table>
+
+    <shared-loading-spinner
+      messageLoanding="Buscando Capitales"
+      *ngIf="isLoading"
+    ></shared-loading-spinner>
+
+    <countries-table
+      [countries]="countries"
+      paramsSearch="No se encontraron Capitales"
+    ></countries-table>
   </div>
 </div>

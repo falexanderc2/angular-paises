@@ -1,24 +1,32 @@
-import { Component } from '@angular/core';
-import { Country } from '../../interfaces/country';
-import { CountriesService } from '../../services/countries.service';
+import { Component, OnInit } from '@angular/core'
+import { TCountry } from '../../interfaces/country'
+import { CountriesService } from '../../services/countries.service'
 
-@Component({
+@Component( {
   selector: 'pge-by-country-page',
   templateUrl: './by-country-page.component.html',
   styles: ``
-})
-export class ByCountryPageComponent {
+} )
+export class ByCountryPageComponent implements OnInit {
 
-  public countries: Country[] =[]
+  public countries: TCountry = []
+  public isLoading: boolean = false
+  public initValue: string = ''
 
-  constructor(private countriesService: CountriesService) { }
+  constructor ( private countriesService: CountriesService ) { }
+  ngOnInit (): void {
+    this.countries = this.countriesService.cacheStore.byCountries.countries
+    this.initValue = this.countriesService.cacheStore.byCountries.term
+  }
 
-  
-  searchByCountry(term: string) { 
-    this.countriesService.searchAPI(term,'name').
-      subscribe((datos) => {
-       return this.countries = datos
-      })
+
+  searchByCountry ( term: string ) {
+    this.isLoading = true
+    this.countriesService.searchAPI( term, 'name' ).
+      subscribe( ( datos ) => {
+        this.countries = datos
+        this.isLoading = false
+      } )
   }
 
 }

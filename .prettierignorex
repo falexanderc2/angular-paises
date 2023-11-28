@@ -1,0 +1,12 @@
+# Ignorar todos los archivos en el directorio "node_modules"
+node_modules/
+
+# Ignorar todos los archivos en el directorio "dist"
+dist/
+
+# Ignorar todos los archivos en el directorio "coverage"
+coverage/
+
+# Ignorar archivos específicos
+src/app/file-to-ignore.ts
+src/assets/file-to-ignore.css

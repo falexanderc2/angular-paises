@@ -1,12 +1,24 @@
+<!-- (onValue)="searchByCountry($event)" -->
 <h2> Por País</h2>
 <hr>
 <div class="row">
   <div class="col">
-    <shared-search-box (onValue)="searchByCountry($event)" placeholder="Escriba el nombre del País"></shared-search-box>
+    <shared-search-box
+      (onDebounce)="searchByCountry($event)"
+      [initValue]="initValue"
+      placeholder="Escriba el nombre del País"
+    ></shared-search-box>
   </div>
 </div>
 <div class="row">
   <div class="col">
-     <countries-table [countries]="countries" paramsSearch="No se encontraron Países"></countries-table>
+    <shared-loading-spinner
+      messageLoanding="Buscando Países"
+      *ngIf="isLoading"
+    ></shared-loading-spinner>
+    <countries-table
+      [countries]="countries"
+      paramsSearch="No se encontraron Países"
+    ></countries-table>
   </div>
 </div>

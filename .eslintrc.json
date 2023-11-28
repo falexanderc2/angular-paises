@@ -1,0 +1,37 @@
+{
+	/* parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint/eslint-plugin", "prettier", "html","javascript"],
+  extends: [
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ], */
+	"parser": "@typescript-eslint/parser",
+	"extends": [
+		"plugin:@typescript-eslint/recommended",
+		"prettier/@typescript-eslint",
+		"plugin:prettier/recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2020,
+		"sourceType": "module"
+	},
+	"rules": {
+		"semi": ["error", "never"],
+		"quotes": ["error", "single"],
+		"no-tabs": ["error", { "allowIndentationTabs": true }],
+		"comma-spacing": ["error", { "before": false, "after": true }],
+		"array-bracket-spacing": ["error", "always"],
+		"object-curly-spacing": ["error", "always"],
+		"space-in-parens": ["error", "never"],
+		"space-infix-ops": "error",
+		"space-before-blocks": "error",
+		"keyword-spacing": "error",
+		"no-trailing-spaces": "error",
+		"eol-last": ["error", "always"],
+		"html/quotes": ["error", "single"],
+		"html/html-extensions": ["error", ".html"],
+
+		"html/indent": ["error", 2, { "attribute": 1, "baseIndent": 1, "closeBracket": 0 }]
+	}
+}

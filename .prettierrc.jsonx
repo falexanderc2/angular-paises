@@ -1,13 +1,20 @@
 {
   "bracketSameLine": true,
+  
   "semi": false,
   "useTabs": true,
   "trailingComma": "all",
   "singleAttributePerLine": true,
   "requirePragma": true,
-  "proseWrap": "never",
   "quoteProps": "as-needed",
   "bracketSpacing": true,
   "arrowParens": "always",
-  "singleQuote": true
+  "singleQuote": true,
+  "spaceAroundOperators": true,
+  "printWidth": 100,
+  "proseWrap": "preserve",
+  "endOfLine": "auto",
+  "tabWidth": 2,
+  "insertPragma":true,
+  "experimentalTernaries": true
 }

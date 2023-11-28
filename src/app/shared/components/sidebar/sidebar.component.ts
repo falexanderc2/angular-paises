@@ -15,8 +15,8 @@ export class SidebarComponent {
     { id: 2, title: 'Por País', ruta: 'countries/by-country' },
     { id: 3, title: 'Por Región', ruta: 'countries/by-region' }
   ]
-    
-  emitSelectMenu(value: string): void{
+
+  emitSelectMenu(value: string): void {
     this.onSelecteMenu.emit(value)
   }
 

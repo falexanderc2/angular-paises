@@ -1,5 +1,5 @@
 import { Component,Input } from '@angular/core';
-import { Country } from '../../interfaces/country';
+import { TCountry } from '../../interfaces/country';
 
 @Component({
   selector:'countries-table',
@@ -8,7 +8,7 @@ import { Country } from '../../interfaces/country';
 })
 export class CountryTableComponent {
   @Input()
-  public countries:  Country[]=[]
+  public countries:  TCountry=[]
   
   @Input()
   public paramsSearch:string=''
